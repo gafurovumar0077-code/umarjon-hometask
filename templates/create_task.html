@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>Create task</title>
+    </head>
+    <body>
+        <div class="df">
+            <h1 class="as">Create task</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="text" name="title" placeholder="Title" required maxlength="200">
+
+                <textarea name="description" placeholder="Description"></textarea>
+
+                <label>
+                    <input type="checkbox" name="is_completed">
+                    Completed
+                </label>
+
+                <button class="bt" type="submit">Save</button>
+                <a class="bt" href="{% url 'profile' %}">Profile</a>
+            </form>
+        </div>
+    </body>
+</html>

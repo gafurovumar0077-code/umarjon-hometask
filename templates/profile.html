@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Profile {{request.user.username}}</h1>
+    <h1>Email {{request.user.email}}</h1>
+
+
+    <h1 class="as">My tasks</h1>
+<div class="df">
+    <form method="GET">
+        <div class="fd">
+            <input type="text" name="q" value="{{query}}" placeholder="Search by title">
+        </div>
+
+        <div class="az">
+            <button class="bt" type="submit">Search</button>
+            <a class="bt" href="{% url 'task_create' %}">Add task</a>
+        </div>
+    </form>
+</div>
+
+{% for task in tasks %}
+    <div class="fr">
+        <div>
+            <h2>{{task.title}}</h2>
+            <p>{{task.is_completed|yesno:"Completed,In progress"}}</p>
+        </div>
+
+        <div class="az">
+            <a class="bt" href="{% url 'task_detail' task.id %}">Open</a>
+        </div>
+    </div>
+{% empty %}
+    <p>No tasks found</p>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>Task</title>
+    </head>
+    <body>
+            <h1 class="as">{{task.title}}</h1>
+
+            <div class="fr">
+                <div>
+                    <p>{{task.description}}</p>
+                    <p>{{task.is_completed|yesno:"Completed,In progress"}}</p>
+                </div>
+
+                <div class="az">
+                    <a class="bt" href="{% url 'task_update' task.id %}">Update</a>
+
+                    <form method="POST" action="{% url 'task_delete' task.id %}">
+                        {% csrf_token %}
+                        <button class="bt" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        <div class="di">
+            <a class="bt" href="{% url 'profile' %}">Profile</a>
+        </div>
+    </body>
+</html>
